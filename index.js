@@ -31,13 +31,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       if (event.type == "message" && event.message.type == "text"){
         console.log(event.message.text);
           // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-          if (event.message.text == "こんにちは"){
-              // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "これはこれは"
-              }));
-          }
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: event.message.text
+        }));
       }
   });
 
