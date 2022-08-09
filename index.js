@@ -1,6 +1,3 @@
-// APIコールのためのクライアントインスタンスを作成
-const bot = new line.Client(line_config);
-
 // -----------------------------------------------------------------------------
 // モジュールのインポート
 const server = require("express")();
@@ -19,7 +16,9 @@ server.listen(process.env.PORT || 3000);
 
 
 // -----------------------------------------------------------------------------
-// ルーター設定
+// APIコールのためのクライアントインスタンスを作成
+const bot = new line.Client(line_config);
+
 // ルーター設定
 server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   // 先行してLINE側にステータスコード200でレスポンスする。
