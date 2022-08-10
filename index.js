@@ -41,22 +41,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             type: "text",
             text: "あなたは大学" + user_old + "年生ですか？次は性別。男/女"
           }));
-        }else if (user_old != ""){
-          if (event.message.text=="男"||event.message.text=="女"){
-            user_gender = event.message.text;
-            events_processed.push(bot.replyMessage(event.replyToken, {
-              type: "text",
-              text: "あなたは" + user_gender + "性です。情報を登録します。"
-            }));
-            user_data.push({Old:user_old, Gender:user_gender});
-            console.log(user_data);
-            events_processed.push(bot.replyMessage(event.replyToken, {
-              type: "text",
-              text: "情報を登録しました。あなたは大学"+ user_old + "年生の" + user_gender + "性です"
-            }));
-            user_gender = "";
-            user_old = "";
-          }else{
+        }else{
             console.log(event.message.text);
             events_processed.push(bot.replyMessage(event.replyToken, {
               type: "text",
