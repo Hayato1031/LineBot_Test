@@ -33,35 +33,35 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   var stage_status = 0;
   var stage_status_in_function = 0;
 
-  function user_age_data_get(){
-    if(isNaN(event.message.text) == true){
-      events_processed.push(bot.replyMessage(event.replyToken, {
-        type: "text",
-        text: "あなたは" + event.message.text + "歳です。次は名前を入力してください。"
-      }));
-      user_old = event.message.text;
-      stage ++;
-    }else{
-      events_processed.push(bot.replyMessage(event.replyToken, {
-        type: "text",
-        text: "数字を入力してください"
-      }));
-    }
-  }
-
-  function user_name_data_get(){
-      user_name = event.message.text;
-      events_processed.push(bot.replyMessage(event.replyToken, {
-        type: "text",
-        text: "あなたの名前は" + user_name + "です"
-      }));
-      user_old = event.message.text;
-      stage ++;
-    }
-
 
   // イベントオブジェクトを順次処理。
   req.body.events.forEach((event) => {
+      //fuction
+      function user_age_data_get(){
+        if(isNaN(event.message.text) == true){
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: "あなたは" + event.message.text + "歳です。次は名前を入力してください。"
+          }));
+          user_old = event.message.text;
+          stage ++;
+        }else{
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: "数字を入力してください"
+          }));
+        }
+      }
+    
+      function user_name_data_get(){
+          user_name = event.message.text;
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: "あなたの名前は" + user_name + "です"
+          }));
+          user_old = event.message.text;
+          stage ++;
+      }
       // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
       if (event.type == "message" && event.message.type == "text"){
             if (stage_status ==0){
