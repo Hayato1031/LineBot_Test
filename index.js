@@ -44,7 +44,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             text: "あなたは" + event.message.text + "歳です。次は名前を入力してください。"
           }));
           user_old = event.message.text;
-          stage ++;
+          stage_status ++;
         }else{
           events_processed.push(bot.replyMessage(event.replyToken, {
             type: "text",
@@ -60,7 +60,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
             text: "あなたの名前は" + user_name + "です"
           }));
           user_old = event.message.text;
-          stage ++;
+          stage_status ++;
       }
       // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
       if (event.type == "message" && event.message.type == "text"){
